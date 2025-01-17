@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP Logger</title>
+</head>
+<body>
+
+    <!-- Кнопка для отправки запроса -->
+    <button id="get-ip-btn">Ок</button>
+
+    <!-- Здесь будет располагаться весь другой контент страницы -->
+
+    <!-- Добавляем JavaScript внизу страницы перед закрывающим тегом </body> -->
+    <script>
+        // Слушаем событие клика по кнопке "Ок"
+        document.getElementById('get-ip-btn').addEventListener('click', () => {
+            // Отправляем запрос на сервер для получения IP
+            fetch('/get-ip', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);  // Покажет сообщение от сервера
+            })
+            .catch(error => {
+                console.error('Ошибка:', error);
+            });
+        });
+    </script>
+
+</body>
+</html>
